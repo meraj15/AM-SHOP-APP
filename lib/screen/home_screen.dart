@@ -1,5 +1,6 @@
 import 'package:am_shops/controller/logic.dart';
 import 'package:am_shops/screen/add_card_screen.dart';
+import 'package:am_shops/widget/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:am_shops/model/api_model.dart';
@@ -55,7 +56,7 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      drawer: const Drawer(backgroundColor: Colors.white),
+      drawer:const DrawerWidget(),
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: const Text(
