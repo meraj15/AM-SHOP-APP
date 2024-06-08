@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ShowModelButton extends StatelessWidget {
   double height;
   String title;
@@ -20,10 +21,10 @@ class ShowModelButton extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style:const TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 22,
+            fontSize: 20,
           ),
         ),
       ),

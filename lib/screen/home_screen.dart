@@ -2,15 +2,15 @@ import 'package:am_shops/controller/logic.dart';
 import 'package:am_shops/screen/add_card_screen.dart';
 import 'package:am_shops/widget/drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:am_shops/model/api_model.dart';
 import 'package:am_shops/screen/product_detail_screen.dart';
 import 'package:am_shops/widget/card_button.dart';
 import 'package:am_shops/widget/circular_progress_indicator.dart';
 import 'package:am_shops/widget/filter_option.dart';
+import 'package:am_shops/widget/sorting_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => HomeScreenState();
@@ -29,6 +29,7 @@ class HomeScreenState extends State<HomeScreen> {
   bool isSelected4 = false;
   bool isSelected5 = false;
   String selectedFilter = "";
+  String selectedSort = "None";
 
   @override
   void initState() {
@@ -52,11 +53,59 @@ class HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void showSortingBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SortingBottomSheet(
+          onSelect: (String sortOption) {
+            setState(
+              () {
+                selectedSort = sortOption;
+                if (selectedSort == "High to Low") {
+                  for (int i = 0; i < cardProduct.length; i++) {
+                    for (int j = 0; j < cardProduct.length - i - 1; j++) {
+                      if (cardProduct[j].price < cardProduct[j + 1].price) {
+                        var temp = cardProduct[j];
+                        cardProduct[j] = cardProduct[j + 1];
+                        cardProduct[j + 1] = temp;
+                      }
+                    }
+                  }
+                } else if (selectedSort == "Low to High") {
+                  for (int i = 0; i < cardProduct.length; i++) {
+                    for (int j = 0; j < cardProduct.length - i - 1; j++) {
+                      if (cardProduct[j].price > cardProduct[j + 1].price) {
+                        var temp = cardProduct[j];
+                        cardProduct[j] = cardProduct[j + 1];
+                        cardProduct[j + 1] = temp;
+                      }
+                    }
+                  }
+                } else {
+                  for (int i = 0; i < cardProduct.length; i++) {
+                    for (int j = 0; j < cardProduct.length - i - 1; j++) {
+                      if (cardProduct[j].rate < cardProduct[j + 1].rate) {
+                        var temp = cardProduct[j];
+                        cardProduct[j] = cardProduct[j + 1];
+                        cardProduct[j + 1] = temp;
+                      }
+                    }
+                  }
+                }
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      drawer:const DrawerWidget(),
+      drawer: const DrawerWidget(),
       appBar: AppBar(
         backgroundColor: Colors.orange,
         title: const Text(
@@ -224,6 +273,23 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Sort by:",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.sort),
+                              onPressed: showSortingBottomSheet,
+                            ),
+                          ],
+                        ),
+                      ),
                       Expanded(
                         child: buildCardList(),
                       ),
@@ -242,6 +308,8 @@ class HomeScreenState extends State<HomeScreen> {
               (selectedFilter.isEmpty || element.category == selectedFilter),
         )
         .toList();
+
+    // No sorting logic here as requested
 
     if (filterProduct.isEmpty) {
       return const Center(

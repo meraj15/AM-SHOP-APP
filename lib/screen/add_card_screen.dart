@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:am_shops/model/api_model.dart';
 import 'package:am_shops/widget/quantity_selector.dart';
@@ -6,11 +5,12 @@ import 'package:am_shops/widget/show_model_button.dart';
 import 'package:am_shops/widget/size_selector.dart';
 import 'package:am_shops/widget/total_price_card.dart';
 
+// ignore: must_be_immutable
 class AddCardProduct extends StatefulWidget {
   List<ProductData> product;
   ValueNotifier<int> totalProductCards;
 
-  AddCardProduct({
+  AddCardProduct({super.key, 
     required this.product,
     required this.totalProductCards,
   });
@@ -29,7 +29,7 @@ class _AddCardProductState extends State<AddCardProduct> {
             Navigator.of(context).pop(widget.product);
             setState(() {});
           },
-          icon:const Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -83,10 +83,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                     decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
-                    child: Hero(
-                      tag: cards.image,
-                      child: Image.network(cards.image),
-                    ),
+                    child: Image.network(cards.image),
                   ),
                 ),
                 Expanded(
@@ -125,7 +122,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                     showModalBottomSheet(
+                                showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return StatefulBuilder(
@@ -146,7 +143,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
+                                                     const Text(
                                                         "Select Size",
                                                         style: TextStyle(
                                                           fontWeight:
@@ -161,7 +158,7 @@ class _AddCardProductState extends State<AddCardProduct> {
 
                                                           setState(() {});
                                                         },
-                                                        child: Icon(
+                                                        child:const Icon(
                                                           Icons.close,
                                                           color: Colors.orange,
                                                         ),
@@ -356,7 +353,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                   showModalBottomSheet(
+                                showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return StatefulBuilder(
@@ -377,7 +374,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
+                                                     const Text(
                                                         "Select Quantity",
                                                         style: TextStyle(
                                                           fontWeight:
@@ -390,7 +387,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child: Icon(
+                                                        child:const Icon(
                                                           Icons.close,
                                                           color: Colors.orange,
                                                         ),
@@ -501,7 +498,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                                       },
                                     );
                                   },
-                                   );
+                                );
                               },
                               child: Container(
                                 width: 65,
@@ -590,7 +587,7 @@ class _AddCardProductState extends State<AddCardProduct> {
                     QuantitySelectorState.selectedIndexQuantity = 1;
                     setState(() {});
                   },
-                  icon:const Icon(
+                  icon: const Icon(
                     Icons.close,
                     color: Colors.orange,
                   ),

@@ -4,12 +4,13 @@ import 'package:am_shops/widget/show_model_button.dart';
 
 class TotalPriceCard extends StatelessWidget {
   final List<ProductData> product;
+  // ignore: prefer_typing_uninitialized_variables
   final context;
- const TotalPriceCard({
-    Key? key,
+  const TotalPriceCard({
+    super.key,
     required this.product,
     required this.context,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     num totalPrice = product.fold(
@@ -20,7 +21,7 @@ class TotalPriceCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         ScaffoldMessenger.of(context).showSnackBar(
-         const SnackBar(
+          const SnackBar(
             duration: Duration(seconds: 1),
             content: Text("Your order was successful!"),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SignUpScreenRegister extends StatefulWidget {
-  SignUpScreenRegister({super.key});
+  const SignUpScreenRegister({super.key});
 
   @override
   State<SignUpScreenRegister> createState() => _SignUpScreenRegisterState();

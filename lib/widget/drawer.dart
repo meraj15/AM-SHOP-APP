@@ -8,66 +8,97 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Text(
-              "Khan Meraj",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-            accountEmail: Text(
-              "khanmeraj1542005@gmail.com",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage("assets/profile.png"),
-              radius: 30.0,
-            ),
-            decoration: BoxDecoration(
+          Container(
+            height: 228,
+            width: double.infinity,
+            decoration:const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.orange, Colors.deepOrange],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 50), // Add some space at the top
+                CircleAvatar(
+                  backgroundImage: AssetImage("assets/profile.png"),
+                  radius: 50,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Khan Meraj",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  "khanmeraj1542005@gmail.com",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 16), // Add some space at the bottom
+              ],
+            ),
           ),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                _createDrawerItem(
+                createDrawerItem(
                   icon: Icons.home,
                   text: 'Home',
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('home-screen');
+                  },
                 ),
-                _createDrawerItem(
+                createDrawerItem(
+                  icon: Icons.shopping_cart,
+                  text: 'My Cart',
+                  onTap: () {
+                    Navigator.of(context).pushNamed('add-card-screen');
+                  },
+                ),
+                createDrawerItem(
+                  icon: Icons.history,
+                  text: 'Order History',
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/order-history');
+                  },
+                ),
+                createDrawerItem(
                   icon: Icons.person,
                   text: 'Profile',
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/profile');
+                  },
                 ),
-                _createDrawerItem(
+                createDrawerItem(
                   icon: Icons.settings,
                   text: 'Settings',
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/settings');
+                  },
                 ),
-                _createDrawerItem(
-                  icon: Icons.notifications,
-                  text: 'Notifications',
-                  onTap: () => Navigator.of(context).pop(),
-                ),
-                Divider(),
-                _createDrawerItem(
+                const Divider(),
+                createDrawerItem(
                   icon: Icons.help,
                   text: 'Help & Support',
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/help-support');
+                  },
                 ),
-                _createDrawerItem(
+                createDrawerItem(
                   icon: Icons.logout,
                   text: 'Logout',
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/');
+                  },
                 ),
               ],
             ),
@@ -77,16 +108,16 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-  Widget _createDrawerItem({
+  Widget createDrawerItem({
     required IconData icon,
     required String text,
-    GestureTapCallback? onTap,
+    VoidCallback? onTap,
   }) {
     return ListTile(
       leading: Icon(icon, color: Colors.orange),
       title: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
         ),

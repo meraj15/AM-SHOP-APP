@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:am_shops/model/api_model.dart';
 
+// ignore: must_be_immutable
 class SizeSelector extends StatefulWidget {
   String selectedSize;
   VoidCallback updateOnTime;

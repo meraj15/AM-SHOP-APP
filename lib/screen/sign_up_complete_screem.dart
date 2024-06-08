@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SignUpScreenComplete extends StatefulWidget {
-  SignUpScreenComplete({super.key});
+  const SignUpScreenComplete({super.key});
 
   @override
   State<SignUpScreenComplete> createState() => _SignUpScreenCompleteState();
@@ -84,7 +84,7 @@ class _SignUpScreenCompleteState extends State<SignUpScreenComplete> {
                             ),
                   contentPadding:
                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  prefixIcon: Icon(
+                  prefixIcon:const Icon(
                     Icons.person,
                     color: Colors.grey,
                   ),

@@ -6,7 +6,7 @@ import 'package:am_shops/screen/add_card_screen.dart';
 class ProductDetailScreen extends StatefulWidget {
   final ProductData product;
 
-  const ProductDetailScreen({required this.product});
+  const ProductDetailScreen({super.key, required this.product});
 
   @override
   ProductDetailScreenState createState() => ProductDetailScreenState();
